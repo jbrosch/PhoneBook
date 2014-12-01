@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>code</groupId>
+        <artifactId>myphonebook</artifactId>
+        <version>2.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>myphonebook-war</artifactId>
+    <name>PhoneBook WAR</name>
+    <packaging>war</packaging>
+
+    <description>what an incredible amount of descriptions</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>code</groupId>
+            <artifactId>myphonebook-ejb</artifactId>
+            <version>2.0-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        <plugins>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <id>copy-parent-site</id>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                              <echo>Copying site directory from parent</echo>
+                                <copy todir="${project.build.directory}/${pom.artifactId}-2.0-SNAPSHOT" failonerror="false" overwrite="true">
+                                    <fileset dir="${pom.basedir}/../docs"/>
+                                </copy>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
